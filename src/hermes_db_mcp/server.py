@@ -61,8 +61,7 @@ def main():
         app = BearerAuthMiddleware(app)
         uvicorn.run(app, host="0.0.0.0", port=8080)
     elif transport == "streamable-http":
-        app = Starlette(routes=[Mount("/", app=mcp.streamable_http_app())])
-        app = BearerAuthMiddleware(app)
+        app = BearerAuthMiddleware(mcp.streamable_http_app())
         uvicorn.run(app, host="0.0.0.0", port=8080)
     else:
         mcp.run(transport=transport)
