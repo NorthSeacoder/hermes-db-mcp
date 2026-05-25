@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+uv.lock
+.claude/
+.cursor/

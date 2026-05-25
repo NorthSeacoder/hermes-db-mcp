@@ -1,0 +1,12 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Template defaults and test fixtures"
+paths = [
+  '''(^|/)\.env\.example$''',
+]
+regexes = [
+  '''sk-your-new-api-token''',
+  '''password@localhost''',
+]

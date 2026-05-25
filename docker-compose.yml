@@ -1,0 +1,13 @@
+services:
+  hermes-db-mcp:
+    image: ghcr.io/northseacoder/hermes-db-mcp:latest
+    container_name: hermes-db-mcp
+    env_file: .env
+    restart: unless-stopped
+    pull_policy: always
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
