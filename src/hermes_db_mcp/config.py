@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     embedding_model: str = "BAAI/bge-m3"
     embedding_dimension: int = 1024
     transport: str = "stdio"
+    api_token: str = ""
 
 
 settings = Settings()

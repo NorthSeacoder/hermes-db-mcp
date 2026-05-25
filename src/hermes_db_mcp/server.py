@@ -5,10 +5,14 @@ from dataclasses import dataclass
 import asyncpg
 import redis.asyncio as aioredis
 import httpx
+import uvicorn
+from starlette.applications import Starlette
+from starlette.routing import Mount
 
 from mcp.server.fastmcp import FastMCP
 
 from hermes_db_mcp.config import settings
+from hermes_db_mcp.middleware import BearerAuthMiddleware
 
 
 @dataclass
@@ -52,7 +56,12 @@ def register_tools():
 def main():
     register_tools()
     transport = settings.transport
-    mcp.run(transport=transport)
+    if transport == "sse":
+        app = Starlette(routes=[Mount("/", app=mcp.sse_app())])
+        app = BearerAuthMiddleware(app)
+        uvicorn.run(app, host="0.0.0.0", port=8080)
+    else:
+        mcp.run(transport=transport)
 
 
 if __name__ == "__main__":
